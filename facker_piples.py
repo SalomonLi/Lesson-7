@@ -33,7 +33,7 @@ def get_fast_nod(a, b):
 
 # get_nod = test_time(get_nod)
 # get_fast_nod = test_time(get_fast_nod)
-res2 = get_fast_nod(2, 7858764564765)
-res = get_nod(2, 168970)
+res2 = get_fast_nod(2, 1000000)
+res = get_nod(2, 1000000)
 
 print( res2)
