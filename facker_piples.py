@@ -88,6 +88,8 @@ def generate():
    night_club = Night_Club(first_name, last_name, company_name, job, email)
    return night_club
 
+
+@test_time
 def generate_dict():
    resul = []
    for i in range(1, 100):
