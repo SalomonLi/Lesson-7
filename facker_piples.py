@@ -94,7 +94,7 @@ def generate_dict():
    resul = []
    for i in range(1, 100):
        fake_agent = generate()
-       listing.append({i: {"last_name": fake_agent.last_name, "first_name": fake_agent.first_name}})
+       resul.append({i: {"last_name": fake_agent.last_name, "first_name": fake_agent.first_name}})
        # print(f"First Name- {fake_agent.first_name}, Last Name- {fake_agent.last_name}, "
        #   f"Company- {fake_agent.company_name}, Job- {fake_agent.job}, Email- {fake_agent.email}")
    return resul
