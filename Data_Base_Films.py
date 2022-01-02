@@ -1,15 +1,12 @@
-
-
-
 class Movie():
-    def __init__(self, title, year, genres, rating = 0):
+    def __init__(self, title, year, genres, played = 0):
         self.title = title
         self.year = year
         self.genres = genres
-        self.rating = rating
+        self.played = played
 
     def play(self):
-        self.rating += 1
+        self.played += 1
 
 
     def __str__(self):
@@ -22,34 +19,20 @@ class Selial(Movie):
         self.number_seasons = number_seasons
 
 
-    # Decorator !!!!!
     def __str__(self):
-        if self.number_seasons < 9 and self.number_episode < 9:
-            return f'{self.title} S0{self.number_seasons}E0{self.number_episode}'
-
-        elif self.number_seasons < 9 and self.number_episode > 9:
-
-            return f'{self.title} S0{self.number_seasons}E{self.number_episode}'
-
-        elif self.number_seasons > 9 and self.number_episode < 9:
-
-            return f'{self.title} S{self.number_seasons}E0{self.number_episode}'
-
-        else:
-            return f'{self.title} S{self.number_seasons}E{self.number_episode}'
-
+        return f'{self.title} S{self.number_seasons:0>2}E{self.number_episode:0>2}'
 
 
 film = Movie(title="Flach", year= 2000, genres="cos")
 
-print(film.rating)
+print(film.played)
 
 for i in range(0,6):
     film.play()
 
-print(film.rating)
+print(film.played)
 
-serials = Selial(title="The Simpsons", year=1999, genres="cos", number_episode=1, number_seasons=10)
+serials = Selial(title="The Simpsons", year=1999, genres="cos", number_episode=1, number_seasons=18)
 
 print(film)
 print(serials)
