@@ -77,7 +77,7 @@ def generate_views(object):
         return x.title
 
 def top_titles(*content_type):
-    # nie wiem jak to zric
+    # nie wiem jak to zrobic
     pass
 
 
