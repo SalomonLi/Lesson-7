@@ -32,19 +32,17 @@ class Selial(Movie):
         return f'{self.title} S{self.number_seasons:0>3}E{self.number_episode:0>2}'
 
 
-film = Movie(title="Flach", year= 2000, genres="cos")
+film_id_0 = Movie(title="The Flach", year= 2000, genres="cos")
+film_id_1 = Movie(title="The Shawshank Redemption", year= 2000, genres="cos")
+film_id_2 = Movie(title="The Shawshank Redemption", year= 2000, genres="cos")
+film_id_3 = Movie(title="The Godfather: Part II", year= 2000, genres="cos")
+film_id_4 = Movie(title="Pulp Fiction", year= 2000, genres="cos")
+film_id_5 = Movie(title="Star Wars", year= 2000, genres="cos")
 
-print(film.played)
-
-for i in range(0,6):
-    film.play()
-
-print(film.played)
 
 serials = Selial(title="The Simpsons", year=1999, genres="cos", number_episode=1, number_seasons=18)
 
-print(film)
-print(serials)
+films = [film_id_0, serials, film_id_1, film_id_2, film_id_3, film_id_4, film_id_5  ]
 
 x = str(serials)
 #
@@ -52,33 +50,50 @@ x = str(serials)
 # print(x)
 def get_movies(values):
     rezultat = []
-    if isinstance(values, Selial) != True :
-        rezultat.append(str(values))
-        return rezultat
+    for name in values:
+        if isinstance(name, Selial) != True :
+            rezultat.append(str(name))
+    rezultat.sort()
+    return rezultat
 
 
 
 def get_serials(values):
     rezultat = []
-    if isinstance(values, Selial):
-        rezultat.append(str(values))
-        return rezultat
+    for name in values:
+        if isinstance(name, Selial):
+            rezultat.append(str(name))
+    rezultat.sort()
+    return rezultat
 
 def search(values, object):
     rezultat = []
     for searching in values:
-        if str(searching).lower() in str(object).lower():
-            rezultat.append(searching.title())
+        for object_id in object:
+            if str(searching).lower() in str(object_id).lower():
+                rezultat.append(searching.title())
     return rezultat
 
 def generate_views(object):
-    x = random.choice(object)
-    if isinstance(x, Movie):
-        return x.title
+    obj = random.choice(object)
+    plays = random.randint(1,100)
+    if isinstance(obj, Movie):
+        obj.played = plays
+        return f'{obj} Quantity = {obj.played} '
 
-def top_titles(*content_type):
-    # nie wiem jak to zrobic
-    pass
+
+def generate_views_loop(value = 0):
+    for _ in range(0, value):
+        # print(generate_views(films), sep="\n")
+        generate_views(films)
+
+def top_titles(values, top = 3, content_type = films or serials):
+
+    top_sorted = sorted(values , key = lambda values : values.played)
+    if top <= len(top_sorted):
+        return top_sorted[:top]
+    else:
+        return top_sorted
 
 
 
@@ -88,15 +103,18 @@ def top_titles(*content_type):
 # x = get_movies(serials)
 # print(x)
 
-print(get_movies(film))
-print(get_movies(serials))
-
-print(get_serials(film))
-print(get_serials(serials))
+print(get_movies(films))
+print(get_serials(films))
 
 # print(search(('Flach', 'Grezbi', "..."), serials))
-print(search(('Flach', 'Grezbi', "...", "flach"), film))
+print(search(('The Flach', 'Grezbi', "...", "the flach"), films))
 
-x = (film, serials)
 
-print(generate_views(x))
+
+generate_views(films)
+
+generate_views_loop(10)
+
+
+top_list = top_titles(films)
+print(top_list)
