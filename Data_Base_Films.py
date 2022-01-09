@@ -34,7 +34,7 @@ class Selial(Movie):
 
 film_id_0 = Movie(title="The Flach", year= 2000, genres="cos")
 film_id_1 = Movie(title="The Shawshank Redemption", year= 2000, genres="cos")
-film_id_2 = Movie(title="The Shawshank Redemption", year= 2000, genres="cos")
+film_id_2 = Movie(title="The Godfather: Part I", year= 2000, genres="cos")
 film_id_3 = Movie(title="The Godfather: Part II", year= 2000, genres="cos")
 film_id_4 = Movie(title="Pulp Fiction", year= 2000, genres="cos")
 film_id_5 = Movie(title="Star Wars", year= 2000, genres="cos")
@@ -42,19 +42,16 @@ film_id_5 = Movie(title="Star Wars", year= 2000, genres="cos")
 
 serials = Selial(title="The Simpsons", year=1999, genres="cos", number_episode=1, number_seasons=18)
 
-films = [film_id_0, serials, film_id_1, film_id_2, film_id_3, film_id_4, film_id_5  ]
+films = [film_id_0, serials, film_id_1, film_id_2, film_id_3, film_id_4, film_id_5]
 
-x = str(serials)
-#
-# print(type(x))
-# print(x)
+
+
 def get_movies(values):
     rezultat = []
     for name in values:
         if isinstance(name, Selial) != True :
-            rezultat.append(str(name))
-    rezultat.sort()
-    return rezultat
+            rezultat.append(name)
+    return sorted(rezultat, key= lambda films_id: films_id.title)
 
 
 
@@ -62,29 +59,27 @@ def get_serials(values):
     rezultat = []
     for name in values:
         if isinstance(name, Selial):
-            rezultat.append(str(name))
-    rezultat.sort()
-    return rezultat
+            rezultat.append(name)
+    return sorted(rezultat, key= lambda films_id: films_id.title)
 
-def search(values, object):
+def search(values, object_type_class):
     rezultat = []
     for searching in values:
-        for object_id in object:
-            if str(searching).lower() in str(object_id).lower():
+        for parser_class_obj in object_type_class:
+            if str(searching).lower() in str(parser_class_obj).lower():
                 rezultat.append(searching.title())
     return rezultat
 
-def generate_views(object):
-    obj = random.choice(object)
-    plays = random.randint(1,100)
-    if isinstance(obj, Movie):
-        obj.played = plays
-        return f'{obj} Quantity = {obj.played} '
+def generate_views(object_types_list):
+    random_values = random.choice(object_types_list)
+    random_quantity = random.randint(1, 100)
+    if isinstance(random_values, Movie):
+        random_values.played = random_quantity
+        return f'{random_values} Quantity = {random_values.played} '
 
 
 def generate_views_loop(value = 0):
     for _ in range(0, value):
-        # print(generate_views(films), sep="\n")
         generate_views(films)
 
 def top_titles(values, top = 3, content_type = films or serials):
@@ -98,10 +93,7 @@ def top_titles(values, top = 3, content_type = films or serials):
 
 
 
-# x = get_movies(film)
-# print(x)
-# x = get_movies(serials)
-# print(x)
+
 
 print(get_movies(films))
 print(get_serials(films))
